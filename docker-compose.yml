@@ -1,0 +1,60 @@
+services:
+  backend:
+    container_name: ${APP_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - db
+      - mongo
+      - redis
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      API_SECRET_KEY: ${API_SECRET_KEY}
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      MONGO_HOST: mongo
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB: ${MONGO_DB}
+      MONGO_USER: ${MONGO_USER}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: dockerPostgres-${APP_NAME}
+    volumes:
+      - .dbdata:/var/lib/postgres
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    command: -p ${POSTGRES_PORT}
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    container_name: dockerRedis-${APP_NAME}
+    restart: always
+
+  mongo:
+    image: mongo
+    container_name: dockerMongo-${APP_NAME}
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    restart: always
+
+volumes:
+  mongo_data: {}

@@ -1,0 +1,21 @@
+repos:
+  # Go formatting
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+      - id: go-imports
+
+  # Go linting with golangci-lint
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.8.0
+    hooks:
+      - id: golangci-lint
+        args: ['--timeout=3m']
+
+  # Conventional commits
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.0.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
