@@ -68,6 +68,19 @@ func main() {
 	}
 
 	ctx := context.Background()
+
+	storage, err := factory.NewStorage(ctx)
+	if err != nil {
+		log.Fatalf("failed to init storage: %v", err)
+	}
+	rabbitmq, err := factory.NewRabbitMQ()
+	if err != nil {
+		log.Fatalf("failed to init rabbitmq: %v", err)
+	}
+	defer rabbitmq.Close()
+	// storage and rabbitmq are ready to inject into module factories/handlers.
+	_ = storage
+
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
 
