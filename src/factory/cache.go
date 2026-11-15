@@ -9,10 +9,11 @@ func NewRedisClient() *redis.Client {
 	redisHost := config.GetEnvString("REDIS_HOST", "localhost")
 	redisPort := config.GetEnvString("REDIS_PORT", "6379")
 	redisPassword := config.GetEnvString("REDIS_PASSWORD", "")
+	redisDB := config.GetEnvInt("REDIS_DB", 0)
 
 	return redis.NewClient(&redis.Options{
 		Addr:     redisHost + ":" + redisPort,
 		Password: redisPassword,
-		DB:       0,
+		DB:       redisDB,
 	})
 }
