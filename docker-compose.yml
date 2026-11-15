@@ -10,6 +10,7 @@ services:
       - db
       - mongo
       - redis
+      - rabbitmq
     environment:
       POSTGRES_HOST: db
       POSTGRES_DB: ${POSTGRES_DB}
@@ -20,6 +21,22 @@ services:
       API_SECRET_KEY: ${API_SECRET_KEY}
       REDIS_HOST: redis
       REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_DB: ${REDIS_DB}
+      MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+      MINIO_USE_SSL: ${MINIO_USE_SSL}
+      MINIO_PUBLIC_ENDPOINT: ${MINIO_PUBLIC_ENDPOINT}
+      MINIO_PUBLIC_USE_SSL: ${MINIO_PUBLIC_USE_SSL}
+      STORAGE_UPLOAD_URL_EXPIRY_MINUTES: ${STORAGE_UPLOAD_URL_EXPIRY_MINUTES}
+      STORAGE_DOWNLOAD_URL_EXPIRY_MINUTES: ${STORAGE_DOWNLOAD_URL_EXPIRY_MINUTES}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST}
       MONGO_HOST: mongo
       MONGO_PORT: ${MONGO_PORT}
       MONGO_DB: ${MONGO_DB}
@@ -45,6 +62,17 @@ services:
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     container_name: dockerRedis-${APP_NAME}
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: dockerRabbitMQ-${APP_NAME}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     restart: always
 
   mongo:
