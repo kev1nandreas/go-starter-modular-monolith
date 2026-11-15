@@ -20,8 +20,8 @@ require (
 	github.com/swaggo/swag v1.16.6
 	go.mongodb.org/mongo-driver v1.17.10
 	go.uber.org/zap v1.27.1
+	golang.org/x/time v0.16.0
 	golang.org/x/crypto v0.58.0
-	golang.org/x/time v0.15.0
 	gorm.io/driver/postgres v1.6.3
 	gorm.io/gorm v1.31.2
 )
