@@ -1,12 +1,12 @@
 module github.com/kev1nandreas/go-rest-api-template
 
-go 1.26.0
+go 1.26.10
 
 require (
 	github.com/araujo88/gin-gonic-xss-middleware v0.0.0-20221014023455-d89f16de6a7e
 	github.com/brianvoe/gofakeit/v7 v7.18.0
 	github.com/gin-contrib/cors v1.7.9
-	github.com/gin-contrib/secure v1.1.3
+	github.com/gin-contrib/secure v1.1.7
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang-jwt/jwt v3.2.2+incompatible
@@ -89,7 +89,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/arch v0.29.0 // indirect
 	golang.org/x/mod v0.41.0 // indirect
-	golang.org/x/net v0.60.0 // indirect
+	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
